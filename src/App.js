@@ -8,6 +8,8 @@ import {Albums} from "./components/Albums";
 import {Tracks} from "./components/Tracks";
 import {AddUser} from "./components/AddUser";
 import {UserEdit} from "./components/UserEdit";
+import {ArtistEdit} from "./components/ArtistEdit";
+import {AddArtist} from "./components/AddArtist";
 
 const App = () => {
     return (
@@ -15,11 +17,13 @@ const App = () => {
             <Header/>
             <Route exact path={'/'} render={()=> <h1>Main</h1>}/>
             <Route exact path={'/users'} component={Users}/>
-            <Route path={'/artists'} component={Artists}/>
+            <Route exact path={'/artists'} component={Artists}/>
             <Route path={'/albums'} component={Albums}/>
             <Route path={'/tracks'} component={Tracks}/>
             <Route path={'/addUser'} component={AddUser}/>
+            <Route path={'/addArtist'} component={AddArtist}/>
             <Route path={'/users/edit/:id'} component={UserEdit}/>
+            <Route path={'/artists/edit/:id'} component={ArtistEdit}/>
         </div>
     );
 }

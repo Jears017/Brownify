@@ -1,13 +1,16 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import '../index.css'
 
-export const Users = () => {
+export const Users = (props) => {
+
+    const [userData, setUserData] = useState([])
 
     useEffect(() => {
-        axios('http://localhost:8080/users').then(res => console.log(res.data))
-    }, [])
+        axios('http://localhost:8080/users').then(res => setUserData(res.data))
+    }, [userData])
+
     return (
         <div>
             <div className='button-user'>
@@ -24,13 +27,16 @@ export const Users = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td><NavLink to='users/edit/:id'>edit</NavLink></td>
-                </tr>
+                {userData.map((user,user_id) => (
+                    <tr>
+                        <th scope="row">{user_id+1}</th>
+                        <td>{user.userName}</td>
+                        <td>{user.firstName}</td>
+                        <td>{user.secondName}</td>
+                        <td><NavLink to={`users/edit/${user.id}`}>edit</NavLink></td>
+                    </tr>
+                ))
+                }
                 </tbody>
             </table>
         </div>
